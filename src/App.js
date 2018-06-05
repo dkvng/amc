@@ -24,40 +24,26 @@ class App extends Component {
   }
 
   allContent() {
-    this.state.content.map(item => {
+    return this.state.content.map(el => {
       return (
         <section>
-          item
+          <img src={el.i} />
+          <div dangerouslySetInnerHTML={{ __html: el.t }} />
         </section>
       );
     });
   }
 
-
-
   render() {
-    console.log(this.state.content);
-    console.log(this.state.meta);
-
     return (
       <div className="App">
-        {
-          (
-            Object.values(this.state.content).length > 0 ? this.state.meta.i : ""
-          )
-        }
-        {
-          (Object.values(this.state.content).length > 0 ?
-            this.state.content.map((el) => {
-              return (
-                <section>
-                  <img src={el.i}/>
-                  {el.t}
-                </section>
-              );
-            }) : "ok"
-          )
-        }
+        {Object.values(this.state.meta).length > 0 ? (
+          <img src={this.state.meta.i} />
+        ) : (
+          ""
+        )}
+
+        {Object.values(this.state.content).length > 0 ? this.allContent() : ""}
       </div>
     );
   }
